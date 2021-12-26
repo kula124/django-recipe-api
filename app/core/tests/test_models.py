@@ -22,3 +22,13 @@ class ModelTests(TestCase):
     """Test creating user with no email raises error"""
     with self.assertRaises(ValueError):
       get_user_model().objects.create_user(None, 'aa')
+  
+  def test_create_new_superuser(self):
+    """Create superuser"""
+    user = get_user_model().objects.create_superuser(
+      "user@super.com",
+      "strongPassword"
+    )
+
+    self.assertTrue(user.is_staff)
+    self.assertTrue(user.is_superuser)
